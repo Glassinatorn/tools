@@ -1,0 +1,76 @@
+#import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
+
+#let nord = (
+  // Polar Night
+  color1: rgb("#2E3440"),
+  color2: rgb("#3B4252"),
+  color3: rgb("#434C5E"),
+  color4: rgb("#4C566A"),
+
+  // Snow Storm
+  color5: rgb("#D8DEE9"),
+  color6: rgb("#E5E9F0"),
+  color7: rgb("#ECEFF4"),
+
+  // Frost
+  color8: rgb("#8FBCBB"), // Light blue-green
+  color9: rgb("#88C0D0"), // Medium blue
+  color10: rgb("#81A1C1"), // Darker blue
+  color11: rgb("#5E81AC"), // Darkest blue
+
+  // Aurora
+  color12: rgb("#BF616A"), // Red
+  color13: rgb("#D08770"), // Orange
+  color14: rgb("#EBCB8B"), // Yellow
+  color15: rgb("#A3BE8C"), // Green
+  color16: rgb("#B48EAD"), // Purple
+)
+
+// setting theme
+#{
+  let data_file = "data.json"
+  set page(fill: nord.color1)
+  set text(fill: nord.color9)
+}
+
+// defining components
+#let components = (
+  "gateway_mta": "102.24.3.1",
+  "router_web": "102.10.0.1",
+  "server1": "102.24.11.12",
+  "server2": "102.24.11.14",
+  "server3": "102.24.11.16",
+)
+
+// defining connections between components
+#let component_connections = (
+  "gateway_mta": ("server1", "server2", "server3"),
+  "server1": "router_web",
+)
+
+// combining everything
+#let num_of_components = components.len()
+
+#let nodes = ()
+#let n = 0
+#while n < 10 {
+  n = n + 1
+  (n,)
+
+  let first_key = component_connections.keys().at(0)
+
+  nodes.insert(0, node((0,n), [#n], stroke: blue))
+}
+
+#for (name, connection) in component_connections {
+  (name, connection)
+}
+
+// creating diagram
+#diagram(
+  node-fill: gradient.radial(white, blue, radius: 200%),
+  node-stroke: blue,
+  (
+    nodes
+  ).intersperse(edge("o--|>")).join()
+)
