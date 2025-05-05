@@ -1,5 +1,7 @@
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
 
+// TODO: 
+// change components into bigger dict to hold positions as well if needed 
 #let nord = (
   // Polar Night
   color1: rgb("#2E3440"),
@@ -27,8 +29,8 @@
 )
 
 // setting theme
-set page(fill: nord.color1)
-set text(fill: nord.color9)
+#set page(fill: nord.color1)
+#set text(fill: nord.color9)
 
 // defining components
 #let components = (
@@ -50,15 +52,19 @@ set text(fill: nord.color9)
 
 #let nodes = ()
 #let n = 0
-#while n < 6 {
+#while n < components.len() {
+  let key = components.keys().at(n)
+  let value = components.at(key)
+
+  let title = [#key#linebreak()#value]
+
+  nodes.insert(0, node((0,n), title, fill: nord.color4))
+
   n = n + 1
-  (n,)
-
-  let first_key = component_connections.keys().at(0)
-
-  nodes.insert(0, node((0,n), [#n], stroke: blue))
-  nodes.insert(0, node((3,n), [#n], stroke: black))
 }
+
+#let first_key = component_connections.keys().at(1)
+#component_connections.at(first_key)
 
 #for (name, connection) in component_connections {
   (name, connection)
