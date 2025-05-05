@@ -2,6 +2,9 @@
 
 // TODO: 
 // change components into bigger dict to hold positions as well if needed 
+// make it possible to position things in corners or mid with "top/mid/..."
+// just make the pusher add a buffer between the groups to have the furthest one be just beyond the reach of the other ones
+// make the group borders depend on routers
 #let nord = (
   // Polar Night
   color1: rgb("#2E3440"),
