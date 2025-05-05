@@ -27,11 +27,8 @@
 )
 
 // setting theme
-#{
-  let data_file = "data.json"
-  set page(fill: nord.color1)
-  set text(fill: nord.color9)
-}
+set page(fill: nord.color1)
+set text(fill: nord.color9)
 
 // defining components
 #let components = (
@@ -53,13 +50,14 @@
 
 #let nodes = ()
 #let n = 0
-#while n < 10 {
+#while n < 6 {
   n = n + 1
   (n,)
 
   let first_key = component_connections.keys().at(0)
 
   nodes.insert(0, node((0,n), [#n], stroke: blue))
+  nodes.insert(0, node((3,n), [#n], stroke: black))
 }
 
 #for (name, connection) in component_connections {
