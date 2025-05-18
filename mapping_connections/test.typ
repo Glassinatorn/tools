@@ -37,11 +37,18 @@
 
 // defining components
 #let components = (
-  "gateway_mta": "102.24.3.1",
-  "router_web": "102.10.0.1",
-  "server1": "102.24.11.12",
-  "server2": "102.24.11.14",
-  "server3": "102.24.11.16",
+  "gateway_mta": ( 
+    "ip": "102.24.3.1", 
+    "connections": (
+      "server1", 
+      "server2", 
+      "server3"
+    ) 
+  ),
+  "router_web": ("ip": "102.10.0.1", "connections": ("gateway_mta")),
+  "server1": ("ip": "102.24.11.12", "connections": ("router_web")), 
+  "server2": ("ip": "102.24.11.14", "connections": ("router_web")),
+  "server3": ("ip": "102.24.11.16", "connections": ("router_web")),
 )
 
 // defining connections between components
