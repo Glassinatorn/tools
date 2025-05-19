@@ -50,7 +50,7 @@
 #let keys = components.keys()
 #let tmp = ""
 
-// recursive function to evaluate wieghts for components
+// loop to evaluate wieghts for components
 #{
   let n = 0
   while n < keys.len() {
