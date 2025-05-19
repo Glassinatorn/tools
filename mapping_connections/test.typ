@@ -1,7 +1,7 @@
 #import "@preview/fletcher:0.5.7" as fletcher: diagram, node, edge
 
 // TODO: 
-// make a recursive function that goes through all the connections and builds a hierchy
+// make a loop to hand out weights based on connections
 // make it possible to position things in corners or mid with "top/mid/..."
 // just make the pusher add a buffer between the groups to have the furthest one be just beyond the reach of the other ones
 // make the group borders depend on routers
