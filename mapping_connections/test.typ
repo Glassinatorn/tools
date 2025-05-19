@@ -37,21 +37,29 @@
 
 // defining components
 #let components = (
-  "gateway_mta": ( "ip": "102.24.3.1", "connections_to": ("server1"), "weight": 0),
+  "gateway_mta": ( "ip": "102.24.3.1", "connections_to": ("server1", "server2"), "weight": 0),
   "router_web": ("ip": "102.10.0.1", "connections_to": ("internet"), "weight": 0),
   "server1": ("ip": "102.24.11.12", "connections_to": ("gateway_mta"), "weight": 0), 
   "server2": ("ip": "102.24.11.14", "connections_to": ("gateway_mta"), "weight": 0),
   "server3": ("ip": "102.24.11.16", "connections_to": ("gateway_mta"), "weight": 0),
+  "server4": ("ip": "102.24.11.16", "connections_to": ("gateway_mta"), "weight": 0),
 )
 
 
 // combining everything
-#let num_of_components = components.len()
+#let keys = components.keys()
+#let tmp = ""
 
 // recursive function to evaluate wieghts for components
-# {
+#{
+  let n = 0
+  while n < keys.len() {
+    let component = components.at(keys.at(n))
+    let connections = component.at("connections_to")
+    let to_put_key
+    n = n + 1
+  }
 }
-
 #let nodes = ()
 #let n = 0
 #while n < components.len() {
@@ -65,12 +73,7 @@
   n = n + 1
 }
 
-#let first_key = component_connections.keys().at(1)
-#component_connections.at(first_key)
 
-#for (name, connection) in component_connections {
-  (name, connection)
-}
 
 // creating diagram
 #diagram(
