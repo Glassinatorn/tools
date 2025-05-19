@@ -52,11 +52,6 @@
   "server3": ("ip": "102.24.11.16", "connections": ("router_web"), "weight": 0),
 )
 
-// defining connections between components
-#let component_connections = (
-  "gateway_mta": ("server1", "server2", "server3"),
-  "server1": "router_web",
-)
 
 // combining everything
 #let num_of_components = components.len()
