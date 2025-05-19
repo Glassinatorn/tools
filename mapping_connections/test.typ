@@ -37,19 +37,11 @@
 
 // defining components
 #let components = (
-  "gateway_mta": ( 
-    "ip": "102.24.3.1", 
-    "connections": (
-      "server1", 
-      "server2", 
-      "server3"
-    ),
-    "weight": 0,
-  ),
-  "router_web": ("ip": "102.10.0.1", "connections": ("gateway_mta"), "weight": 0),
-  "server1": ("ip": "102.24.11.12", "connections": ("router_web"), "weight": 0), 
-  "server2": ("ip": "102.24.11.14", "connections": ("router_web"), "weight": 0),
-  "server3": ("ip": "102.24.11.16", "connections": ("router_web"), "weight": 0),
+  "gateway_mta": ( "ip": "102.24.3.1", "connections_to": ("server1"), "weight": 0),
+  "router_web": ("ip": "102.10.0.1", "connections_to": ("internet"), "weight": 0),
+  "server1": ("ip": "102.24.11.12", "connections_to": ("gateway_mta"), "weight": 0), 
+  "server2": ("ip": "102.24.11.14", "connections_to": ("gateway_mta"), "weight": 0),
+  "server3": ("ip": "102.24.11.16", "connections_to": ("gateway_mta"), "weight": 0),
 )
 
 
@@ -57,7 +49,8 @@
 #let num_of_components = components.len()
 
 // recursive function to evaluate wieghts for components
-
+# {
+}
 
 #let nodes = ()
 #let n = 0
