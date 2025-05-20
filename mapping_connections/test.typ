@@ -37,7 +37,8 @@
 
 // defining components
 #let components = (
-  "gateway_mta": ( "ip": "102.24.3.1", "connections_to": ("server1", "server2"), "weight": 0),
+  "internet": ( "ip": "10.10.0.1", "connections_to": (), "weight": 0),
+  "gateway_mta": ( "ip": "102.24.3.1", "connections_to": ("router_web"), "weight": 0),
   "router_web": ("ip": "102.10.0.1", "connections_to": ("internet"), "weight": 0),
   "server1": ("ip": "102.24.11.12", "connections_to": ("gateway_mta"), "weight": 0), 
   "server2": ("ip": "102.24.11.14", "connections_to": ("gateway_mta"), "weight": 0),
@@ -56,10 +57,21 @@
   while n < keys.len() {
     let component = components.at(keys.at(n))
     let connections = component.at("connections_to")
-    let to_put_key
+
+    if type(connections) == array {
+      for connection in connections {
+        components.at(connection).at("weight") += 1
+      }
+    } else {
+      components.at(connections).at("weight") += 1
+    }
+
     n = n + 1
   }
 }
+
+#components
+
 #let nodes = ()
 #let n = 0
 #while n < components.len() {
