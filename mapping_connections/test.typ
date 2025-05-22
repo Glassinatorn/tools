@@ -70,7 +70,6 @@
   }
 }
 
-#components
 
 #let nodes = ()
 #let n = 0
@@ -80,7 +79,10 @@
 
   let title = [#key#linebreak()#value]
 
-  nodes.insert(0, node((0,n), title, fill: nord.color4))
+  let x_offset = value.at("weight")/2
+  let y_offset = value.at("weight")
+  //[#key: #value #linebreak()]
+  nodes.insert(0, node((x_offset,y_offset), title, fill: nord.color4))
 
   n = n + 1
 }
