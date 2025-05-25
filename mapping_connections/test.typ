@@ -51,22 +51,28 @@
 #let keys = components.keys()
 #let tmp = ""
 
-// loop to evaluate wieghts for components
+// Loop to evaluate weights for components
 #{
+  let keys = components.keys()  // Get the keys of the components
   let n = 0
+  
   while n < keys.len() {
-    let component = components.at(keys.at(n))
-    let connections = component.at("connections_to")
+    let key = keys.at(n)  // Get the current key
+    let component = components.at(key)  // Get the component by key
+    let connections = component.at("connections_to")  // Get connections
 
+    // Check if connections is an array
     if type(connections) == array {
       for connection in connections {
+        // Increment the weight of each connected component
         components.at(connection).at("weight") += 1
       }
-    } else {
+    } else if connections != () {
+      // If it's a single connection, increment its weight
       components.at(connections).at("weight") += 1
     }
 
-    n = n + 1
+    n = n + 1  // Move to the next component
   }
 }
 
